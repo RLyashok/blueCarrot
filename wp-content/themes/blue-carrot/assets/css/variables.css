@@ -1,0 +1,13 @@
+:root {
+    --color-grey:#F1F1F1;
+    --color-white:#FFFFFF;
+    --color-dark:#030B28;
+    --color-dark-alt:#4F5569;
+    --color-blue:#2E83FF;
+    --color-silver:#CDCED4;
+
+    --border-radius-large:80px;
+    --border-radius-medium:30px;
+    --border-radius-smal:5px;
+}
+

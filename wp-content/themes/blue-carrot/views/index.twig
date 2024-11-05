@@ -1,0 +1,98 @@
+{% extends 'base.twig' %}
+
+{% block content %}
+    <section class="cyf">
+        <div class="cyf__body container">
+
+            <div class="cyf__header">
+                <h3>{{ cyf_page_title }}</h3>
+            </div>
+
+            <div class="cyf__items accordion-container">
+                {% if accordion_items %}
+                    {% for section in accordion_items %}
+                        {% if section.acf_fc_layout == 'cyf_plates' %}
+                            <div class="cyf__item ac">
+
+                                <div class="item__header">
+                                    <div class="item__title">
+                                        <h4>{{ loop.index }}. {{ section.title }}</h4>
+                                        <div class="selected-labels" id="selectedLabels"></div>
+                                    </div>
+                                    <div class="item__header-plates">
+                                        <h4>{{ loop.index }}. {{ section.title_content }}</h4>
+                                        <p>{{ section.description_title_content }}</p>
+                                    </div>
+                                    <div class="header__button ac-trigger">
+                                        <button class="btn silver-btn open-btn">Edit</button>
+                                    </div>
+                                </div>
+
+                                <div class="ac-panel">
+                                    <div class="cyf-main cyf__plates">
+                                        {% for item in section.content_items %}
+                                            <div class="item__plate">
+                                                <img src="{{ item.item_image.url }}" alt="{{ item.item_checkbox_text }}"
+                                                     loading="lazy"/>
+                                                <div class="cyf__checkbox">
+                                                    <input type="checkbox" class="checkbox"
+                                                           id="{{ item.item_checkbox_text }}{{ loop.index }}">
+                                                    <label for="{{ item.item_checkbox_text }}{{ loop.index }}">{{ item.item_checkbox_text }}</label>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+
+                                    <div class="cyf__button">
+                                        <button class="btn dark-btn close-btn ac-trigger">Next step</button>
+                                    </div>
+                                </div>
+
+                            </div>
+                        {% endif %}
+
+                        {% if section.acf_fc_layout == 'cyf_text' %}
+                            <div class="cyf__item ac">
+
+                                <div class="item__header">
+                                    <div class="item__title">
+                                        <h4>{{ loop.index }}. {{ section.title }}</h4>
+                                    </div>
+                                    <div class="item__header-plates">
+                                        <h4>{{ loop.index }}. {{ section.title }}</h4>
+                                    </div>
+                                </div>
+
+                                <div class="ac-panel">
+                                    <div class="cyf__text">
+                                        {% for item in section.content_items %}
+                                            <div class="item__text">
+                                                <div class="cyf__checkbox">
+                                                    <input type="checkbox" class="checkbox"
+                                                           id="{{ item.item_checkbox_text }}{{ loop.index }}">
+                                                    <label class="checkbox-label"
+                                                           for="{{ item.item_checkbox_text }}{{ loop.index }}">{{ item.item_checkbox_text }}
+                                                        <p class="checkbox-title">{{ item.item_checkbox_title }}</p>
+                                                        <p class="checkbox-text">Video type:
+                                                            <strong>{{ item.video_type }}</strong></p>
+                                                        <p class="checkbox-text">Duration:
+                                                            <strong>{{ item.duration }}</strong></p>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                    <div class="cyf__button">
+                                        <button class="btn dark-btn close-btn ac-trigger">Next step</button>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+

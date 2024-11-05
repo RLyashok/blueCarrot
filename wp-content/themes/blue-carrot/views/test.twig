@@ -1,0 +1,35 @@
+<div class="accordion">
+    {% for item in accordion_items %}
+        <div class="accordion-item">
+            <button class="accordion-header">{{ item.title }}</button>
+            <div class="selected-labels"></div>
+            <div class="accordion-content">
+
+                {# Layout: text_content #}
+                {% if item.acf_fc_layout == 'text_content' %}
+                    <h3 class="accordion-subtitle">{{ item.title }}</h3>
+                    <p>{{ item.description }}</p>
+
+                    {# Layout: image_with_checkbox #}
+                {% elseif item.acf_fc_layout == 'image_with_checkbox' %}
+                    <div class="image-checkbox-block {{ item.shape == 'square' ? 'square-checkbox' : '' }}">
+                        {% if item.image %}
+                            <img src="{{ item.image.src }}" alt="{{ item.image.alt }}" class="image">
+                        {% endif %}
+                        <label class="image-checkbox">
+                            <input type="checkbox" value="{{ item.checkbox_label }}">
+                            <span class="checkmark"></span> {{ item.checkbox_label }}
+                        </label>
+                    </div>
+
+                    {# Layout: video_content #}
+                {% elseif item.acf_fc_layout == 'video_content' %}
+                    <div class="video-content">
+                        <iframe src="{{ item.video_url }}" frameborder="0" allowfullscreen></iframe>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    {% endfor %}
+</div>
